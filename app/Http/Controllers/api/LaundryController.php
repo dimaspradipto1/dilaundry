@@ -19,7 +19,7 @@ class LaundryController extends Controller
 
     function whereUserId($id)
     {
-            $laundries = Laundry::orderBy('city','=', $id)
+            $laundries = Laundry::where('user_id','=', $id)
                 ->with('user', 'shop')
                 ->orderBy('created_at', 'desc')
                 ->get();
@@ -39,8 +39,8 @@ class LaundryController extends Controller
     function claim(Request $request)
     {
         $laundry = Laundry::where([
-            ['id'=> $request->id],
-            ['claim', '=', $request->claim_code],
+            ['id','=',$request->id],
+            ['claim_code','=',$request->claim_code],
         ])->first();
 
         if(!$laundry){
@@ -65,7 +65,6 @@ class LaundryController extends Controller
         }else{
             return response()->json([
                 'message' => 'can not be updated',
-                'data' =>$updated,
             ], 500);
         }
     }

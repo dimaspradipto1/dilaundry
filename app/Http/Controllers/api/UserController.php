@@ -46,7 +46,7 @@ class UserController extends Controller
             ], 401);
         }
 
-        $user = User::where('email'. $request->email)->firstOrFail();
+        $user = User::where('email', $request->email)->firstOrFail();
 
         $token =$user->createToken('auth_token')->plainTextToken;
 

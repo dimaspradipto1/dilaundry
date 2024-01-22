@@ -33,12 +33,12 @@ Route::post('/login', [UserController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function (){
     //laundry
     Route::get('/laundry/user/{id}', [LaundryController::class, 'whereUserId']);
-    Route::get('/laundry/claim', [LaundryController::class, 'claim']);
+    Route::post('/laundry/claim', [LaundryController::class, 'claim']);
 
     //promo
     Route::get('/promo/limit', [PromoController::class, 'readLimit']);
 
     //shop
-    Route::get('/promo/recommendation/limit', [ShopController::class, 'readRecomendationLimit']);
-    Route::get('/shop/seacrh/city/{name}', [ShopController::class, 'searchByCity']);
+    Route::get('/shop/recommendation/limit', [ShopController::class, 'readRecomendationLimit']);
+    Route::get('/shop/search/city/{name}', [ShopController::class, 'searchByCity']);
 });
