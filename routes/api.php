@@ -31,6 +31,9 @@ Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function (){
+    //promo
     Route::get('/promo/limit', [PromoController::class, 'readLimit']);
 
+    //shop
+    Route::get('/promo/recommendation/limit', [ShopController::class, 'readRecomendationLimit']);
 });
