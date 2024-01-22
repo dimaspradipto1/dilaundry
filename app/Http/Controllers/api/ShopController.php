@@ -18,19 +18,36 @@ class ShopController extends Controller
     }
 
     function readRecomendationLimit()
-   {
-        $shops = Shop::orderBy('rate', 'desc')
-            ->limit(5)
-            ->get();
+    {
+            $shops = Shop::orderBy('rate', 'desc')
+                ->limit(5)
+                ->get();
 
-        if(count($shops) > 0){
-            return response()->json([
-                'data' =>$shops,
-            ], 200);
-        }else{
-            return response()->json([
-                'message' => 'No data found',
-            ], 404);
-        }
-   }
+            if(count($shops) > 0){
+                return response()->json([
+                    'data' =>$shops,
+                ], 200);
+            }else{
+                return response()->json([
+                    'message' => 'No data found',
+                ], 404);
+            }
+    }
+
+    function searchByCity($name)
+    {
+            $shops = Shop::orderBy('city','like', '%' .$name. '%')
+                ->orderBy('name')
+                ->get();
+
+            if(count($shops) > 0){
+                return response()->json([
+                    'data' =>$shops,
+                ], 200);
+            }else{
+                return response()->json([
+                    'message' => 'Not found',
+                ], 404);
+            }
+    }
 }
